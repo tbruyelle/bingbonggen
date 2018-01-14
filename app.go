@@ -156,7 +156,6 @@ func (c *App) renderTool(title string, items []string) *vecty.HTML {
 
 func (c *App) renderItems(items []string) *vecty.HTML {
 	var list vecty.List
-
 	for _, item := range items {
 		list = append(list,
 			elem.Span(

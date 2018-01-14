@@ -1,4 +1,10 @@
 all: build
 
-build:
-	gopherjs build . -o app.js
+build: gopherjs
+	go build -v bingbong/cmd/bingbongd
+
+gopherjs:
+	gopherjs build . -o assets/app.js
+
+run: build
+	./bingbongd
