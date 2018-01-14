@@ -8,3 +8,6 @@ gopherjs:
 
 run: build
 	./bingbongd
+
+docker:
+	docker build -t bingbong .
