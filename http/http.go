@@ -3,9 +3,10 @@ package http
 import (
 	"fmt"
 	"net/http"
+	"path/filepath"
 )
 
-func Listen() error {
+func Listen(path string) error {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, `
 <html>
@@ -16,6 +17,7 @@ func Listen() error {
   <body></body>
 </html>`)
 	})
-	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
+	path = filepath.Join(path, "assets")
+	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir(path))))
 	return http.ListenAndServe(":8080", nil)
 }
