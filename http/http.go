@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 )
 
-func Listen(path string) error {
+func Listen(bind, path string) error {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, `
 <html>
@@ -19,5 +19,6 @@ func Listen(path string) error {
 	})
 	path = filepath.Join(path, "assets")
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir(path))))
-	return http.ListenAndServe(":8080", nil)
+
+	return http.ListenAndServe(bind, nil)
 }
