@@ -4,6 +4,10 @@ var bodies = []string{
 	"body_base",
 	"body_sick",
 	"body_angry",
+	"body_orange",
+	"body_indian",
+	"body_brown",
+	"body_ertha",
 }
 
 var eyes = []string{
@@ -13,6 +17,8 @@ var eyes = []string{
 	"eyes_girl_tired",
 	"eyes_boy_angry",
 	"eyes_girl_angry",
+	"eyes_closed",
+	"eyes_happy",
 }
 
 var mouthes = []string{

@@ -1,7 +1,9 @@
 package main
 
 import (
+	"math/rand"
 	"strings"
+	"time"
 
 	"github.com/gopherjs/vecty"
 	"github.com/gopherjs/vecty/elem"
@@ -82,10 +84,18 @@ func (c *App) Render() vecty.ComponentOrHTML {
 					vecty.Markup(vecty.Class("col-md-4")),
 					elem.Button(
 						vecty.Markup(
-							vecty.Class("btn", "btn-default"),
+							vecty.Class("btn", "btn-secondary"),
 							event.Click(c.onReset),
 						),
 						vecty.Text("Reset"),
+					),
+					vecty.Text(" "),
+					elem.Button(
+						vecty.Markup(
+							vecty.Class("btn", "btn-secondary"),
+							event.Click(c.onRandom),
+						),
+						vecty.Text("Aléatoire"),
 					),
 					elem.Break(),
 					elem.Break(),
@@ -159,4 +169,12 @@ func (c *App) renderItems(items []string) *vecty.HTML {
 			))
 	}
 	return elem.Div(list)
+}
+
+func (c *App) onRandom(*vecty.Event) {
+	rand.Seed(time.Now().UnixNano())
+	c.state.body = bodies[rand.Intn(len(bodies))]
+	c.state.mouth = mouthes[rand.Intn(len(mouthes))]
+	c.state.eyes = eyes[rand.Intn(len(eyes))]
+	vecty.Rerender(c)
 }
