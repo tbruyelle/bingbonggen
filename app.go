@@ -133,7 +133,9 @@ func (c *App) onItemClick(item string) func(*vecty.Event) {
 func (c *App) renderTools() *vecty.HTML {
 	return elem.Div(
 		c.renderTool("Corps", bodies),
+		elem.Break(),
 		c.renderTool("Yeux", eyes),
+		elem.Break(),
 		c.renderTool("Bouches", mouthes),
 	)
 }
@@ -157,8 +159,7 @@ func (c *App) renderItems(items []string) *vecty.HTML {
 
 	for _, item := range items {
 		list = append(list,
-			elem.Label(
-				vecty.Markup(vecty.Style("display", "inline")),
+			elem.Span(
 				elem.Image(
 					vecty.Markup(
 						prop.Src("/assets/"+item+".png"),
