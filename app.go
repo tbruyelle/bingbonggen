@@ -74,14 +74,14 @@ func (c *App) Render() vecty.ComponentOrHTML {
 			elem.Div(
 				vecty.Markup(vecty.Class("row")),
 				elem.Div(
-					vecty.Markup(vecty.Class("col-md-8")),
+					vecty.Markup(vecty.Class("col-8")),
 					c.body(),
 					c.eyes(),
 					c.mouth(),
 					c.bonus(),
 				),
 				elem.Div(
-					vecty.Markup(vecty.Class("col-md-4")),
+					vecty.Markup(vecty.Class("col-4")),
 					elem.Button(
 						vecty.Markup(
 							vecty.Class("btn", "btn-secondary"),
