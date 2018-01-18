@@ -18,7 +18,13 @@ var eyes = []string{
 	"eyes_boy_angry",
 	"eyes_girl_angry",
 	"eyes_closed",
+	"eyes_closed2",
 	"eyes_happy",
+	"eyes_cross",
+	"eyes_diff",
+	"eyes_diff_girl",
+	"eyes_fronce",
+	"eyes_tornado",
 }
 
 var mouthes = []string{
@@ -28,8 +34,15 @@ var mouthes = []string{
 	"mouth_smile",
 	"mouth_pascontent",
 	"mouth_miam",
+	"mouth_slobber",
 }
 
-var bonuses = []string{
-	"empty",
+var glasses = []string{
+	"glasses_empty",
+	"glasses_pink",
+}
+
+var hats = []string{
+	"hat_empty",
+	"hat_sheriff",
 }

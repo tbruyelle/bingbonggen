@@ -19,10 +19,11 @@ type App struct {
 	vecty.Core
 
 	state struct {
-		body  string
-		eyes  string
-		mouth string
-		bonus string
+		body    string
+		eyes    string
+		mouth   string
+		glasses string
+		hat     string
 	}
 }
 
@@ -47,11 +48,18 @@ func (c *App) mouth() *vecty.HTML {
 	return img(c.state.mouth)
 }
 
-func (c *App) bonus() *vecty.HTML {
-	if c.state.bonus == "" {
-		c.state.bonus = "empty"
+func (c *App) glasses() *vecty.HTML {
+	if c.state.glasses == "" {
+		c.state.glasses = "empty"
 	}
-	return img(c.state.bonus)
+	return img(c.state.glasses)
+}
+
+func (c *App) hat() *vecty.HTML {
+	if c.state.hat == "" {
+		c.state.hat = "empty"
+	}
+	return img(c.state.hat)
 }
 
 func img(s string) *vecty.HTML {
@@ -78,7 +86,8 @@ func (c *App) Render() vecty.ComponentOrHTML {
 					c.body(),
 					c.eyes(),
 					c.mouth(),
-					c.bonus(),
+					c.glasses(),
+					c.hat(),
 				),
 				elem.Div(
 					vecty.Markup(vecty.Class("col-4")),
@@ -109,7 +118,8 @@ func (c *App) Render() vecty.ComponentOrHTML {
 func (c *App) onReset(*vecty.Event) {
 	c.state.body = ""
 	c.state.eyes = ""
-	c.state.bonus = ""
+	c.state.glasses = ""
+	c.state.hat = ""
 	c.state.mouth = ""
 	vecty.Rerender(c)
 }
@@ -123,8 +133,10 @@ func (c *App) onItemClick(item string) func(*vecty.Event) {
 			c.state.mouth = item
 		} else if strings.HasPrefix(item, "eyes") {
 			c.state.eyes = item
+		} else if strings.HasPrefix(item, "hat") {
+			c.state.hat = item
 		} else {
-			c.state.bonus = item
+			c.state.glasses = item
 		}
 		vecty.Rerender(c)
 	}
@@ -137,6 +149,10 @@ func (c *App) renderTools() *vecty.HTML {
 		c.renderTool("Yeux", eyes),
 		elem.Break(),
 		c.renderTool("Bouches", mouthes),
+		elem.Break(),
+		c.renderTool("Lunettes", glasses),
+		elem.Break(),
+		c.renderTool("Chapeaux", hats),
 	)
 }
 
@@ -176,5 +192,7 @@ func (c *App) onRandom(*vecty.Event) {
 	c.state.body = bodies[rand.Intn(len(bodies))]
 	c.state.mouth = mouthes[rand.Intn(len(mouthes))]
 	c.state.eyes = eyes[rand.Intn(len(eyes))]
+	c.state.glasses = glasses[rand.Intn(len(glasses))]
+	c.state.hat = hats[rand.Intn(len(hats))]
 	vecty.Rerender(c)
 }

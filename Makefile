@@ -11,3 +11,6 @@ run: build
 
 docker:
 	docker build -t bingbong .
+
+deploy:
+	heroku container:push web -a bingbong-generator
