@@ -40,9 +40,13 @@ var mouthes = []string{
 var glasses = []string{
 	"glasses_empty",
 	"glasses_pink",
+	"glasses_blue",
+	"glasses_brown",
 }
 
 var hats = []string{
 	"hat_empty",
 	"hat_sheriff",
+	"hat_chine",
+	"hat_king",
 }
