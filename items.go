@@ -43,6 +43,7 @@ var glasses = []string{
 	"glasses_blue",
 	"glasses_brown",
 	"glasses_star",
+	"glasses_heart",
 }
 
 var hats = []string{
