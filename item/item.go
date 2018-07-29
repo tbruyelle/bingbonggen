@@ -1,6 +1,30 @@
-package main
+package item
 
-var bodies = []string{
+import (
+	"math/rand"
+	"time"
+)
+
+type Item struct {
+	Body    string
+	Eyes    string
+	Mouth   string
+	Glasses string
+	Hat     string
+}
+
+func Random() Item {
+	rand.Seed(time.Now().UnixNano())
+	return Item{
+		Body:    Bodies[rand.Intn(len(Bodies))],
+		Mouth:   Mouthes[rand.Intn(len(Mouthes))],
+		Eyes:    Eyes[rand.Intn(len(Eyes))],
+		Glasses: Glasses[rand.Intn(len(Glasses))],
+		Hat:     Hats[rand.Intn(len(Hats))],
+	}
+}
+
+var Bodies = []string{
 	"body_base",
 	"body_sick",
 	"body_angry",
@@ -10,7 +34,7 @@ var bodies = []string{
 	"body_ertha",
 }
 
-var eyes = []string{
+var Eyes = []string{
 	"eyes_base",
 	"eyes_girl",
 	"eyes_boy_tired",
@@ -27,7 +51,7 @@ var eyes = []string{
 	"eyes_tornado",
 }
 
-var mouthes = []string{
+var Mouthes = []string{
 	"mouth_base",
 	"mouth_happy",
 	"mouth_o",
@@ -37,7 +61,7 @@ var mouthes = []string{
 	"mouth_slobber",
 }
 
-var glasses = []string{
+var Glasses = []string{
 	"glasses_empty",
 	"glasses_pink",
 	"glasses_blue",
@@ -46,7 +70,7 @@ var glasses = []string{
 	"glasses_heart",
 }
 
-var hats = []string{
+var Hats = []string{
 	"hat_empty",
 	"hat_sheriff",
 	"hat_chine",

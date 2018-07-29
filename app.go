@@ -1,9 +1,8 @@
 package main
 
 import (
-	"math/rand"
+	"bingbong/item"
 	"strings"
-	"time"
 
 	"github.com/gopherjs/vecty"
 	"github.com/gopherjs/vecty/elem"
@@ -17,49 +16,42 @@ func main() {
 
 type App struct {
 	vecty.Core
-
-	state struct {
-		body    string
-		eyes    string
-		mouth   string
-		glasses string
-		hat     string
-	}
+	state item.Item
 }
 
 func (c *App) body() *vecty.HTML {
-	if c.state.body == "" {
-		c.state.body = "body_base"
+	if c.state.Body == "" {
+		c.state.Body = "body_base"
 	}
-	return img(c.state.body)
+	return img(c.state.Body)
 }
 
 func (c *App) eyes() *vecty.HTML {
-	if c.state.eyes == "" {
-		c.state.eyes = "eyes_base"
+	if c.state.Eyes == "" {
+		c.state.Eyes = "eyes_base"
 	}
-	return img(c.state.eyes)
+	return img(c.state.Eyes)
 }
 
 func (c *App) mouth() *vecty.HTML {
-	if c.state.mouth == "" {
-		c.state.mouth = "mouth_base"
+	if c.state.Mouth == "" {
+		c.state.Mouth = "mouth_base"
 	}
-	return img(c.state.mouth)
+	return img(c.state.Mouth)
 }
 
 func (c *App) glasses() *vecty.HTML {
-	if c.state.glasses == "" {
-		c.state.glasses = "empty"
+	if c.state.Glasses == "" {
+		c.state.Glasses = "empty"
 	}
-	return img(c.state.glasses)
+	return img(c.state.Glasses)
 }
 
 func (c *App) hat() *vecty.HTML {
-	if c.state.hat == "" {
-		c.state.hat = "empty"
+	if c.state.Hat == "" {
+		c.state.Hat = "empty"
 	}
-	return img(c.state.hat)
+	return img(c.state.Hat)
 }
 
 func img(s string) *vecty.HTML {
@@ -116,11 +108,11 @@ func (c *App) Render() vecty.ComponentOrHTML {
 }
 
 func (c *App) onReset(*vecty.Event) {
-	c.state.body = ""
-	c.state.eyes = ""
-	c.state.glasses = ""
-	c.state.hat = ""
-	c.state.mouth = ""
+	c.state.Body = ""
+	c.state.Eyes = ""
+	c.state.Glasses = ""
+	c.state.Hat = ""
+	c.state.Mouth = ""
 	vecty.Rerender(c)
 }
 
@@ -128,15 +120,15 @@ func (c *App) onItemClick(item string) func(*vecty.Event) {
 	return func(*vecty.Event) {
 		print(item)
 		if strings.HasPrefix(item, "body") {
-			c.state.body = item
+			c.state.Body = item
 		} else if strings.HasPrefix(item, "mouth") {
-			c.state.mouth = item
+			c.state.Mouth = item
 		} else if strings.HasPrefix(item, "eyes") {
-			c.state.eyes = item
+			c.state.Eyes = item
 		} else if strings.HasPrefix(item, "hat") {
-			c.state.hat = item
+			c.state.Hat = item
 		} else {
-			c.state.glasses = item
+			c.state.Glasses = item
 		}
 		vecty.Rerender(c)
 	}
@@ -144,15 +136,15 @@ func (c *App) onItemClick(item string) func(*vecty.Event) {
 
 func (c *App) renderTools() *vecty.HTML {
 	return elem.Div(
-		c.renderTool("Corps", bodies),
+		c.renderTool("Corps", item.Bodies),
 		elem.Break(),
-		c.renderTool("Yeux", eyes),
+		c.renderTool("Yeux", item.Eyes),
 		elem.Break(),
-		c.renderTool("Bouches", mouthes),
+		c.renderTool("Bouches", item.Mouthes),
 		elem.Break(),
-		c.renderTool("Lunettes", glasses),
+		c.renderTool("Lunettes", item.Glasses),
 		elem.Break(),
-		c.renderTool("Chapeaux", hats),
+		c.renderTool("Chapeaux", item.Hats),
 	)
 }
 
@@ -188,11 +180,6 @@ func (c *App) renderItems(items []string) *vecty.HTML {
 }
 
 func (c *App) onRandom(*vecty.Event) {
-	rand.Seed(time.Now().UnixNano())
-	c.state.body = bodies[rand.Intn(len(bodies))]
-	c.state.mouth = mouthes[rand.Intn(len(mouthes))]
-	c.state.eyes = eyes[rand.Intn(len(eyes))]
-	c.state.glasses = glasses[rand.Intn(len(glasses))]
-	c.state.hat = hats[rand.Intn(len(hats))]
+	c.state = item.Random()
 	vecty.Rerender(c)
 }
